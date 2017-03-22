@@ -23,9 +23,9 @@ HttpRequest::HttpRequest(QString http_string)
     http_string.replace(QRegularExpression("(\\w|\\-)+: (\\w|\\,| |\\=|-|\\.|\\:|\\/|\\(|\\)|\\*|\\;)+\\r\\n"), "");
     http_string.replace(QRegularExpression("^(GET|POST|PUT|DELETE|OPTIONS) (\\/|\\w|\\.)+ HTTP/(\\d|\\.)+\\r\\n"), "");
     http_string.replace(QRegularExpression("^\\r\\n"), "");
-    //qDebug() << "replaced" << http_string;
+    qDebug() << "replaced" << http_string;
     this->body = http_string.left(this->headers["Content-Length"].toInt());
-    //qDebug() << "body" << this->body;
+    qDebug() << "body" << this->body;
 }
 
 QString HttpRequest::getHeader(QString key)

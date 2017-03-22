@@ -39,7 +39,7 @@ QString TicketController::printTicket(QJsonDocument json){
     QString pr = pc->print(ticket_data, printer, template_name);
     delete pc;
     QJsonDocument d(ticket_data);
-    return "printed! " + QString(d.toJson()) + " " + pr;
+    return QString(d.toJson());
 }
 
 

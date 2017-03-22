@@ -9,14 +9,14 @@
 #define CONTABILIDAD 2
 #define CLIENTE 3
 
-#define LOGO "C:\\Program Files\\ScriptQuo\\PrinterHost\\factura.png"
+#define LOGO "C:\\Program Files\\ScriptQuo\\PrinterHost\\logo.png"
 #define TEMPLATE_RECIBO "C:\\Program Files\\ScriptQuo\\PrinterHost\\template2.txt"
 #define TEMPLATE_PEDIDO "C:\\Program Files\\ScriptQuo\\PrinterHost\\template3.txt"
 #define TEMPLATE_DIA "C:\\Program Files\\ScriptQuo\\PrinterHost\\template4.txt"
 #define PRINTERS "C:\\Program Files\\ScriptQuo\\PrinterHost\\printers.txt"
 #define DEFAULT_DIR "C:\\Program Files\\ScriptQuo\\PrinterHost\\"
 
-#define CONFIG_FILE "E:\\Ususario Bifrost\\Documents\\build-PrinterHost-Desktop_Qt_5_6_0_MinGW_32bit-Release\\release\\config.dat"
+#define CONFIG_FILE "C:\\Program Files\\ScriptQuo\\PrinterHost\\config.dat"
 #define SERVER_URL "http://192.168.42.129:8000/"
 #include "qstring.h"
 #include "tickets/template.h"

@@ -9,10 +9,11 @@
 class TicketPrinter{
     public:
         virtual void print(Ticket * ticket)=0;
-        void setLogo(QImage * logo);
+        void setLogo(QPixmap logo);
 
         void setPrinter(QString printername);
         void printSection(QString section, QFont font, int flags);
+        void printLogo();
 
     private:
         int line;
@@ -20,11 +21,13 @@ class TicketPrinter{
     protected:
         TicketPrinter();
         QPrinter printer;
-        QImage * logo;
+        QPixmap logo;
         QPainter painter;
         QFont font_t;
         QFont font_p;
         QFont font_r;
+        int margin;
+        int interlineado;
 };
 
 #endif // TICKETPRINTER_H

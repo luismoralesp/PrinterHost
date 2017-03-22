@@ -14,22 +14,25 @@ void BillPrinter::print(Ticket *ticket){
     painter.setBrush(Qt::NoBrush);
     painter.setPen(QColor(0,0,0));
     painter.scale(0.70f,0.70f);
-
+    printLogo();
     printSection(t->getTitle(), font_t, Qt::AlignLeft|Qt::AlignTop);
     printSection(t->getHeader(), font_p, Qt::AlignLeft|Qt::AlignTop);
+    qDebug() << "products"<<products.size();
     for (QList<QString>::Iterator it = products.begin(); it != products.end(); it++){
         QString product = *it;
         qDebug() << "P:" << product;
         printSection(product, font_p, Qt::AlignLeft|Qt::AlignTop);
     }
     printSection(t->getFooter(), font_p, Qt::AlignLeft|Qt::AlignTop);
-
-    /*painter.setFont(font_t);
+/*
+    painter.setFont(font_t);
     QStringList titles = t->getTitle().split("\n");
 
+    int j = 0;
     for (QStringList::Iterator it = titles.begin(); it != titles.end(); it++){
         QString title = *it;
-        painter.drawText(20, 25, 375, 850, Qt::AlignLeft|Qt::AlignTop, title);
+        painter.drawText(20, 25 + j*20, 375, 850, Qt::AlignLeft|Qt::AlignTop, title);
+        j ++;
     }
 
     painter.setFont(font_p);

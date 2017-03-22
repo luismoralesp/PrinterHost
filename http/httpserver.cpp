@@ -17,7 +17,7 @@ HttpServer::~HttpServer()
 void HttpServer::start(int port)
 {
     if(server.listen(QHostAddress::Any, port)){
-        qDebug() << "Error" << server.errorString();
+        qDebug() << "Error E" << server.errorString();
     }
 }
 

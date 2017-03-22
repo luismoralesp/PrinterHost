@@ -20,6 +20,7 @@ HttpResponse PrinterServer::response(HttpRequest request)
     if (request.getMethod() == "POST"){
         str = controller->printTicket(doc);
     }
+    qDebug() << request.getMethod();
     //QJsonObject obj = doc.object();
     //QString var = obj["hola"].toString();
     return HttpResponse(str, "200 Ok");

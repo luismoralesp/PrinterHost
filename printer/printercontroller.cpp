@@ -23,10 +23,10 @@ PrinterController * PrinterController::getInstance(){
 
 QString PrinterController::print(QJsonObject data, QString printer, QString template_name){
     Template temp(Constantes::getInstancia()->getTemplate(template_name));
-    //qDebug() << "data"<<data;
+    //qDebug() << "data"<<temp.getText();
     temp.replace(data);
 
-    QString template_products = temp.findInTemplate("loop");
+    QString template_products = temp.findInTemplate("products").replace("\n", "");
     QString title = temp.findInTemplate("title");
     QString header = temp.findInTemplate("header");
     QString footer = temp.findInTemplate("footer");
@@ -40,29 +40,31 @@ QString PrinterController::print(QJsonObject data, QString printer, QString temp
        array = doc.array();
     }
 
+    //qDebug() << "Array: " << array;
+
     QList<QString> products;
 
     for (QJsonArray::iterator it = array.begin(); it != array.end(); it++){
         QJsonValue value = *it;
         QJsonObject product = value.toObject();
-        QJsonObject prod_obj = product["product_obj"].toObject();
         QString prod = template_products;
 
-        QString name =  prod_obj["name"].toString();
-        qDebug() << template_products << "PP:" << product;
+        QString name =  product["product__name"].toString();
         QString price = "$" + product["total_price"].toString();
         QString count = "x" + QString::number(product["count"].toInt());
 
         if (name.size() > 15){name = name.left(15);}
-        if (price.size() > 15){price = price.left(15);}
+        if (price.size() > 10){price = price.left(10);}
 
         while (name.size() < 15){name += ".";}
-        while (price.size() < 15){price = "." + price;}
+        while (price.size() < 10){price = "." + price;}
         while (count.size() < 2){count = "." + count;}
 
         prod = prod.replace("{{name}}", name);
         prod = prod.replace("{{price}}", price);
         prod = prod.replace("{{count}}", count);
+
+        qDebug() << "name: " << name<<" price: " << price<<" count: "<<count;
         products.append(prod);
     }
     BillTicket ticket;
@@ -71,11 +73,11 @@ QString PrinterController::print(QJsonObject data, QString printer, QString temp
     ticket.setHeader(header);
     ticket.setFooter(footer);
 
-    //QImage logo(LOGO);
+    QPixmap logo(LOGO);
 
     BillPrinter printe;
-    //printer->setLogo(&logo);
-    //qDebug()<< "printer:" << printer << Constantes::getInstancia()->getPrinter(printer);
+    printe.setLogo(logo);
+    qDebug()<< "printer:" << printer << Constantes::getInstancia()->getPrinter(printer);
     printe.setPrinter(Constantes::getInstancia()->getPrinter(printer));
     printe.print(&ticket);
     return printer;
